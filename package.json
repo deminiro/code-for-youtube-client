@@ -1,0 +1,22 @@
+{
+  "name": "deminiro-2019q1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolling-scopes-school/deminiro-2019Q1.git"
+  },
+  "keywords": [
+    "youtube"
+  ],
+  "author": "Denis Mironov <deminiro>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rolling-scopes-school/deminiro-2019Q1/issues"
+  },
+  "homepage": "https://github.com/rolling-scopes-school/deminiro-2019Q1#readme"
+}
