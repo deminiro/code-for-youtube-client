@@ -10,8 +10,13 @@ export default class AppModel {
     const description = data.items.map(clip => clip.snippet.description);
     const image = data.items.map(clip => clip.snippet.thumbnails);
     const arr = [];
+    module.exports = {
+      getUsers: function qwe() {
+        return arr;
+      },
+    };
 
-    for (let i = 0; i < 15; i += 1) {
+    for (let i = 0; i < 4; i += 1) {
       const img = image[i].default.url;
       const ttl = title[i];
       const chTtl = channelTitle[i];
@@ -21,14 +26,16 @@ export default class AppModel {
         img, ttl, chTtl, tim, descr,
       });
     }
+    global.console.log(arr);
     return arr;
   }
 
   async getClipNames() {
-    const { url } = this.state;
-
-    const responce = await fetch(url);
-    const data = await responce.json();
+    const storage = localStorage.getItem('query');
+    const url = this.state.url.concat(storage);
+    const response = await fetch(url);
+    // global.console.log(url);
+    const data = await response.json();
 
     return AppModel.extractClipNames(data);
   }
