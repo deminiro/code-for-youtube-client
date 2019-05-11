@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export default class AppModel {
   constructor(state) {
     this.state = state;
@@ -12,6 +13,7 @@ export default class AppModel {
     const viewers = dataStat.items.map(clip => clip.statistics.viewCount);
     const amountOfResults = data.pageInfo.totalResults;
     const arr = [];
+
     for (let i = 0; i < 4 || i < amountOfResults; i += 1) {
       const img = image[i];
       const ttl = title[i];
@@ -31,29 +33,41 @@ export default class AppModel {
       const preview = document.getElementsByClassName('clip-components-preview');
       const amountOfViewers = document.getElementsByClassName('clip-components-viewers');
       const clipDescription = document.getElementsByClassName('clip-components-description');
+      global.console.log(window.outerWidth);
+      // if (window.outerWidth <= 1400) {
+      //   document.getElementById('right-box').style.display = 'none';
+      // }
 
-      for (let j = 0; j < channelName.length; j += 1) {
-        channelHeadline[j].innerHTML += `<a class="anchor" href="https://www.youtube.com/watch?v=${arr[j].ids}" target="_blanket">${arr[j].ttl}</a>`;
-        channelHeadline[j].style.background = 'darkgreen';
-        channelHeadline[j].style.textAlign = 'center';
-        const anchor = document.getElementsByClassName('anchor')[j];
-        anchor.style.color = 'white';
+      // LOOP TO FILL CLIP COMPONENTS WITH INFORMATION //
+      for (let j = 0; j < data.pageInfo.resultsPerPage; j += 1) {
+        (function infoForComponents() {
+          channelHeadline[j].innerHTML += `<a class="anchor" href="https://www.youtube.com/watch?v=${arr[j].ids}" target="_blanket">${arr[j].ttl}</a>`;
+          channelHeadline[j].style.background = 'darkgreen';
+          channelHeadline[j].style.textAlign = 'center';
+          const anchor = document.getElementsByClassName('anchor')[j];
+          anchor.style.color = 'white';
 
-        preview[j].style.background = `url('${arr[j].img}') no-repeat`;
-        preview[j].style.backgroundSize = '100%';
+          preview[j].style.background = `url('${arr[j].img}') no-repeat`;
+          preview[j].style.backgroundSize = '100%';
 
-        channelName[j].innerHTML += `<div>${arr[j].chTtl}</div>`;
+          channelName[j].innerHTML += `<div>${arr[j].chTtl}</div>`;
 
-        const timeOfUpload = new Date(arr[j].dateUpload);
-        const fullYear = timeOfUpload.getFullYear();
-        const month = timeOfUpload.getMonth();
-        const correctMonth = Number(month);
-        const day = timeOfUpload.getDate();
-        clipDate[j].innerHTML += `${fullYear}-${day}-${correctMonth + 1}`;
+          const timeOfUpload = new Date(arr[j].dateUpload);
+          const fullYear = timeOfUpload.getFullYear();
+          const month = timeOfUpload.getMonth();
+          const correctMonth = Number(month);
+          const day = timeOfUpload.getDate();
+          clipDate[j].innerHTML += `${fullYear}-${day}-${correctMonth + 1}`;
 
-        amountOfViewers[j].innerHTML += arr[j].amountOfViewers;
+          amountOfViewers[j].innerHTML += arr[j].amountOfViewers;
 
-        clipDescription[j].innerHTML += arr[j].descr;
+          clipDescription[j].innerHTML += arr[j].descr;
+        }());
+        global.console.log(channelHeadline[j].innerText);
+        if (channelHeadline[j].innerText === '') {
+          const clipBox = document.getElementsByClassName('clip-components');
+          clipBox[j].innerHTML = '';
+        }
       }
     }, 100);
   }
@@ -72,7 +86,6 @@ export default class AppModel {
     const sliceEnd = urlStatistics.slice(idx);
     const slice = urlStatistics.slice(0, idx);
     const correctIds = slice.concat(idsFromUrl).concat(sliceEnd);
-    global.console.log(idsFromUrl);
     // result
     const responseStat = await fetch(correctIds);
     const dataStat = await responseStat.json();
