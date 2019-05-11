@@ -3,7 +3,7 @@ export default class AppModel {
     this.state = state;
   }
 
-  static extractClipNames(data, dataStat) {
+  static extractClipNames(data, dataStat, identifier) {
     const title = data.items.map(clip => clip.snippet.title);
     const channelTitle = data.items.map(clip => clip.snippet.channelTitle);
     const time = data.items.map(clip => clip.snippet.publishedAt);
@@ -19,8 +19,9 @@ export default class AppModel {
       const dateUpload = time[i];
       const amountOfViewers = viewers[i];
       const descr = description[i];
+      const ids = identifier[i];
       arr.push({
-        img, ttl, chTtl, dateUpload, amountOfViewers, descr,
+        img, ttl, chTtl, dateUpload, amountOfViewers, descr, ids,
       });
     }
     setTimeout(() => {
@@ -32,8 +33,11 @@ export default class AppModel {
       const clipDescription = document.getElementsByClassName('clip-components-description');
 
       for (let j = 0; j < channelName.length; j += 1) {
-        channelHeadline[j].innerHTML += arr[j].ttl;
-        channelHeadline[j].style.background = 'lightgreen';
+        channelHeadline[j].innerHTML += `<a class="anchor" href="https://www.youtube.com/watch?v=${arr[j].ids}" target="_blanket">${arr[j].ttl}</a>`;
+        channelHeadline[j].style.background = 'darkgreen';
+        channelHeadline[j].style.textAlign = 'center';
+        const anchor = document.getElementsByClassName('anchor')[j];
+        anchor.style.color = 'white';
 
         preview[j].style.background = `url('${arr[j].img}') no-repeat`;
         preview[j].style.backgroundSize = '100%';
@@ -62,15 +66,16 @@ export default class AppModel {
     const data = await response.json();
 
     // Statistics for block 'viewers'
+    const identifier = data.items.map(clip => clip.id.videoId);
     const idsFromUrl = data.items.map(clip => clip.id.videoId).toString();
     const idx = urlStatistics.indexOf('&part');
     const sliceEnd = urlStatistics.slice(idx);
     const slice = urlStatistics.slice(0, idx);
     const correctIds = slice.concat(idsFromUrl).concat(sliceEnd);
-
+    global.console.log(idsFromUrl);
     // result
     const responseStat = await fetch(correctIds);
     const dataStat = await responseStat.json();
-    return AppModel.extractClipNames(data, dataStat);
+    return AppModel.extractClipNames(data, dataStat, identifier);
   }
 }
