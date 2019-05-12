@@ -14,7 +14,7 @@ export default class AppModel {
     const amountOfResults = data.pageInfo.totalResults;
     const arr = [];
 
-    for (let i = 0; i < 4 || i < amountOfResults; i += 1) {
+    for (let i = 0; i < data.pageInfo.resultsPerPage && i < amountOfResults; i += 1) {
       const img = image[i];
       const ttl = title[i];
       const chTtl = channelTitle[i];
@@ -33,13 +33,9 @@ export default class AppModel {
       const preview = document.getElementsByClassName('clip-components-preview');
       const amountOfViewers = document.getElementsByClassName('clip-components-viewers');
       const clipDescription = document.getElementsByClassName('clip-components-description');
-      global.console.log(window.outerWidth);
-      // if (window.outerWidth <= 1400) {
-      //   document.getElementById('right-box').style.display = 'none';
-      // }
 
       // LOOP TO FILL CLIP COMPONENTS WITH INFORMATION //
-      for (let j = 0; j < data.pageInfo.resultsPerPage; j += 1) {
+      for (let j = 0; j < data.pageInfo.resultsPerPage && j < amountOfResults; j += 1) {
         (function infoForComponents() {
           channelHeadline[j].innerHTML += `<a class="anchor" href="https://www.youtube.com/watch?v=${arr[j].ids}" target="_blanket">${arr[j].ttl}</a>`;
           channelHeadline[j].style.background = 'darkgreen';
@@ -63,13 +59,15 @@ export default class AppModel {
 
           clipDescription[j].innerHTML += arr[j].descr;
         }());
-        global.console.log(channelHeadline[j].innerText);
-        if (channelHeadline[j].innerText === '') {
-          const clipBox = document.getElementsByClassName('clip-components');
-          clipBox[j].innerHTML = '';
+      }
+
+      if (arr.length < 15) {
+        for (let j = 14; j >= arr.length; j -= 1) {
+          const blocksOfClips = document.getElementById('components');
+          blocksOfClips.children[j].style.display = 'none';
         }
       }
-    }, 100);
+    }, 50);
   }
 
   async getClipNames() {

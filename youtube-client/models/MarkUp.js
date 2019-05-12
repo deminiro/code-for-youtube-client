@@ -59,7 +59,8 @@ export default function MarkUp() {
     const clipBox = document.getElementsByClassName('clip-components');
 
     for (let i = 0; i < 15; i += 1) {
-      div.innerHTML += '<div class="clip-components"></div>';
+      const blocksOfClips = document.getElementById('components');
+      blocksOfClips.innerHTML += '<div class="clip-components"></div>';
       (function leftComponent() {
         clipBox[i].setAttribute('style', 'display: grid; grid-template-rows: 9% 36% 9% 9% 10% 26%; background: white; border-radius: 0%;');
         clipBox[i].innerHTML += '<div id="left-box-headline" class="clip-components-headline" style="width: 100%"></div>';
@@ -108,6 +109,47 @@ export default function MarkUp() {
     }());
   }
 
+  async function animationSlider() {
+    const { head } = document;
+    const blocksOfClips = document.getElementById('components');
+    head.innerHTML += `<style> ${blocksOfClips}.active { 
+      background: rgba(255,255,255,0.3);
+      cursor: grabbing;
+      cursor: -webkit-grabbing;
+      transform: scale(1);
+    } 
+    </style>`;
+    const slider = document.getElementById('components');
+    let mouseDown = false;
+    let startX;
+    let scroll;
+    let needableScroll = scroll;
+
+    slider.addEventListener('mousedown', (e) => {
+      mouseDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      needableScroll = slider.scroll;
+    });
+    slider.addEventListener('mouseleave', () => {
+      mouseDown = false;
+      slider.classList.remove('active');
+    });
+    slider.addEventListener('mouseup', () => {
+      mouseDown = false;
+      slider.classList.remove('active');
+    });
+    slider.addEventListener('mousemove', (e) => {
+      if (!mouseDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const move = (x - startX) * 3;
+      slider.needableScroll = needableScroll - move;
+      global.console.log(mouseDown);
+    });
+  }
+
   queryBox();
   clipComponents();
+  animationSlider();
 }
