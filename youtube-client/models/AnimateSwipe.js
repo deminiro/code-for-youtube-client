@@ -8,7 +8,13 @@ export default function animationSlider() {
       cursor: -webkit-grabbing;
       transform: scale(1);
       }
-      ::-webkit-scrollbar {
+
+      .items {
+        transition: all 0.1s;
+        transform: scale(0.96);
+        cursor: pointer;
+      }
+      ::-webkit-scrollbar, ::-moz-scrollbar{
         width: 0px;
         height: 0px;
       }
