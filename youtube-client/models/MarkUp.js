@@ -1,5 +1,3 @@
-import AppModel from './Requests';
-
 export default function MarkUp() {
   async function queryBox() {
     // title of webpage
@@ -9,11 +7,9 @@ export default function MarkUp() {
     document.body.style.margin = '0';
     document.body.style.paddingTop = '2%';
     document.body.style.overflowY = 'hidden';
-    document.body.style.background = 'lightgrey';
+    document.body.style.backgroundImage = 'linear-gradient(to bottom, #e32a54, #ee6b9d, #eba3d3, #ebd4f3, #ffffff)';
     const header = document.createElement('header');
     const form = document.createElement('form');
-    const datas = AppModel.extractClipNames;
-    global.console.log(datas);
     // icon
     document.head.innerHTML
       += '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"></link>';
@@ -49,7 +45,6 @@ export default function MarkUp() {
 
     // input with submit
 
-    submit.style.height = '7vh';
     submit.style.background = 'none';
     submit.style.border = 'none';
     submit.style.position = 'relative';
@@ -70,7 +65,7 @@ export default function MarkUp() {
     const div = document.getElementById('components');
     div.setAttribute(
       'style',
-      'position: relative; display: grid; grid-template-columns: repeat(15, 300px); grid-gap: 9.5%; height: 461px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;',
+      'position: relative; overflow-x: scroll; display: grid; grid-template-columns: repeat(15, 300px); grid-gap: 9.5%; height: 461px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;',
     );
 
     const clipBox = document.getElementsByClassName('clip-components');
@@ -81,12 +76,12 @@ export default function MarkUp() {
       (function leftComponent() {
         clipBox[i].setAttribute(
           'style',
-          'display: grid; padding-top: 3px; grid-template-rows: 36% 9% 9% 9% 10% 25%; background: white; border-radius: 2%;',
+          'position: relative; display: grid; padding-top: 3px; grid-template-rows: 36% 9% 9% 9% 10% 25%; background: white; border: 1px solid black; border-radius: 2%;',
         );
         clipBox[i].innerHTML
-          += '<div id="left-box-preview" class="clip-components-preview" style="margin-left: 1px; width: 297px"></div>';
+          += '<div id="left-box-preview" class="clip-components-preview" style="width: 298px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-headline" class="clip-components-headline" style="margin-top: 1px; width: 300px"></div>';
+          += '<div id="left-box-headline" class="clip-components-headline" style="margin-top: 1px; width: 298px;"></div>';
         clipBox[i].innerHTML
           += '<div id="left-box-title" class="clip-components-title" style="width: 297px"></div>';
         clipBox[i].innerHTML
