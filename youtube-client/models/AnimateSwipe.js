@@ -19,33 +19,67 @@ export default function animationSlider() {
         height: 0px;
       }
     </style>`;
+    const buttonCurrent = document.getElementById('button-current');
+    let currentPage = 1;
     const slider = document.getElementById('components');
     let isDown = false;
     let startX;
     let scrollLeft;
+    let numForPage = 0;
 
-    slider.addEventListener('mousedown', (e) => {
+    // functions for click events
+    function mouseDown(e) {
       isDown = true;
       slider.classList.add('active');
       startX = e.pageX - slider.offsetLeft;
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
-    });
-    slider.addEventListener('mouseleave', () => {
+    }
+
+    function mouseLeave() {
       isDown = false;
       slider.classList.remove('active');
-    });
-    slider.addEventListener('mouseup', () => {
+    }
+
+    function mouseUp(e) {
       isDown = false;
+      const widthUser = window.document.scrollingElement.clientWidth;
       slider.classList.remove('active');
-    });
-    slider.addEventListener('mousemove', (e) => {
+      const x = e.pageX - slider.offsetLeft;
+      const walk = Math.floor(x - startX);
+      slider.scrollLeft = scrollLeft - walk;
+      if (slider.scrollLeft >= numForPage + 150) {
+        numForPage += widthUser;
+        slider.scrollLeft = numForPage;
+        buttonCurrent.innerText = '';
+        currentPage += 1;
+        buttonCurrent.innerText = currentPage;
+      }
+      if (walk >= 150) {
+        numForPage -= widthUser;
+        slider.scrollLeft = numForPage;
+        buttonCurrent.innerText = '';
+        currentPage -= 1;
+        buttonCurrent.innerText = currentPage;
+      }
+      if (walk < 150 && walk > -150) {
+        slider.scrollLeft = numForPage;
+      }
+    }
+
+    function mouseMove(e) {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 3; // scroll-fast
+      const walk = (x - startX); // scroll-fast
       slider.scrollLeft = scrollLeft - walk;
-    });
+      global.console.log(x, walk, slider.scrollLeft);
+    }
+    // listeners for scroll page
+    slider.addEventListener('mousedown', mouseDown);
+    slider.addEventListener('mouseleave', mouseLeave);
+    slider.addEventListener('mouseup', mouseUp);
+    slider.addEventListener('mousemove', mouseMove);
   }
   animation();
 }

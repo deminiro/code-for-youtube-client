@@ -5,6 +5,8 @@ export default function Slider() {
 
     document.body.innerHTML += '<div id="slider"></div>';
     const slider = document.getElementById('slider');
+    // for swipe per page
+    let numForPage = 0;
 
     slider.style.display = 'flex';
     slider.style.justifyContent = 'center';
@@ -30,61 +32,81 @@ export default function Slider() {
     });
 
     // clicks with buttons
-    const buttonPrevTwice = document.getElementById('button-prev-twice');
-    const buttonPrev = document.getElementById('button-prev');
-    const buttonCurrent = document.getElementById('button-current');
-    const buttonNext = document.getElementById('button-next');
-    const submit = document.getElementById('submit');
-    let currentPage = 1;
+    (function clickButtons() {
+      const buttonPrevTwice = document.getElementById('button-prev-twice');
+      const buttonPrev = document.getElementById('button-prev');
+      const buttonCurrent = document.getElementById('button-current');
+      const buttonNext = document.getElementById('button-next');
+      const submit = document.getElementById('submit');
+      let currentPage = 1;
 
-    function visibleButtons() {
-      buttonCurrent.style.display = '';
-      buttonNext.style.display = '';
+      function visibleButtons() {
+        buttonCurrent.style.display = '';
+        buttonNext.style.display = '';
 
-      buttonCurrent.style.color = 'white';
-      buttonCurrent.innerText = currentPage;
-    }
-
-    function useButtonNext() {
-      buttonCurrent.innerText = '';
-      currentPage += 1;
-      buttonCurrent.innerText = currentPage;
-
-      if (currentPage === 2) {
-        buttonPrev.style.display = '';
+        buttonCurrent.style.color = 'white';
+        buttonCurrent.innerText = currentPage;
       }
 
-      if (currentPage === 3) {
-        buttonPrevTwice.style.display = '';
-      }
-    }
+      function useButtonNext() {
+        buttonCurrent.innerText = '';
+        currentPage += 1;
+        buttonCurrent.innerText = currentPage;
 
-    function prevButton() {
-      buttonCurrent.innerText = '';
-      currentPage -= 1;
-      buttonCurrent.innerText = currentPage;
-      if (currentPage === 1) {
-        buttonPrev.style.display = 'none';
-        buttonPrevTwice.style.display = 'none';
-      }
-      if (currentPage === 2) buttonPrevTwice.style.display = 'none';
-    }
+        const components = document.getElementById('components');
+        // eslint-disable-next-line no-unused-vars
+        let scrollLeft;
+        numForPage += window.document.scrollingElement.clientWidth;
+        components.scrollLeft = numForPage;
 
-    function prevTwiceButton() {
-      buttonCurrent.innerText = '';
-      currentPage -= 2;
-      buttonCurrent.innerText = currentPage;
-      if (currentPage === 1) {
-        buttonPrev.style.display = 'none';
-        buttonPrevTwice.style.display = 'none';
+        if (currentPage === 2) {
+          buttonPrev.style.display = '';
+        }
+
+        if (currentPage === 3) {
+          buttonPrevTwice.style.display = '';
+        }
       }
-      if (currentPage === 2) buttonPrevTwice.style.display = 'none';
-    }
-    (function clickEvents() {
-      submit.addEventListener('click', visibleButtons);
-      buttonNext.addEventListener('click', useButtonNext);
-      buttonPrev.addEventListener('click', prevButton);
-      buttonPrevTwice.addEventListener('click', prevTwiceButton);
+
+      function prevButton() {
+        buttonCurrent.innerText = '';
+        currentPage -= 1;
+        buttonCurrent.innerText = currentPage;
+
+        const components = document.getElementById('components');
+        // eslint-disable-next-line no-unused-vars
+        let scrollLeft;
+        numForPage -= window.document.scrollingElement.clientWidth;
+        components.scrollLeft = numForPage;
+        if (currentPage === 1) {
+          buttonPrev.style.display = 'none';
+          buttonPrevTwice.style.display = 'none';
+        }
+        if (currentPage === 2) buttonPrevTwice.style.display = 'none';
+      }
+
+      function prevTwiceButton() {
+        buttonCurrent.innerText = '';
+        currentPage -= 2;
+        buttonCurrent.innerText = currentPage;
+
+        const components = document.getElementById('components');
+        // eslint-disable-next-line no-unused-vars
+        let scrollLeft;
+        numForPage -= window.document.scrollingElement.clientWidth * 2;
+        components.scrollLeft = numForPage;
+        if (currentPage === 1) {
+          buttonPrev.style.display = 'none';
+          buttonPrevTwice.style.display = 'none';
+        }
+        if (currentPage === 2) buttonPrevTwice.style.display = 'none';
+      }
+      (function clickEvents() {
+        submit.addEventListener('click', visibleButtons);
+        buttonNext.addEventListener('click', useButtonNext);
+        buttonPrev.addEventListener('click', prevButton);
+        buttonPrevTwice.addEventListener('click', prevTwiceButton);
+      }());
     }());
   }
 

@@ -6,7 +6,7 @@ import AnimateSwipe from '../models/AnimateSwipe';
 export default class App {
   constructor() {
     this.state = {
-      url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyAZiyMBKWN-3gTB_nubDKItHuK72xwKNAs&type=video&part=snippet&maxResults=5&q=',
+      url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyAZiyMBKWN-3gTB_nubDKItHuK72xwKNAs&type=video&part=snippet&maxResults=12&q=',
       urlStatistics: 'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyAZiyMBKWN-3gTB_nubDKItHuK72xwKNAs&id=&part=snippet,statistics',
     };
   }
@@ -28,6 +28,13 @@ export default class App {
       this.state.url = this.state.url.slice(0, index + 2);
       main.style.display = 'block';
       this.state.url = this.state.url.concat(query.value);
+
+      // display from first clip box
+      const slider = document.getElementById('components');
+      // eslint-disable-next-line no-unused-vars
+      let scrollLeft;
+      slider.scrollLeft = 0;
+
       model.getClipNames();
       Requests.extractClipNames();
     }, false);
