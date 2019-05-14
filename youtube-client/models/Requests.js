@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 export default class AppModel {
   constructor(state) {
     this.state = state;
@@ -26,55 +25,53 @@ export default class AppModel {
         img, ttl, chTtl, dateUpload, amountOfViewers, descr, ids,
       });
     }
-    setTimeout(() => {
-      const channelHeadline = document.getElementsByClassName('clip-components-headline');
-      const channelName = document.getElementsByClassName('clip-components-title');
-      const clipDate = document.getElementsByClassName('clip-components-date');
-      const preview = document.getElementsByClassName('clip-components-preview');
-      const amountOfViewers = document.getElementsByClassName('clip-components-viewers');
-      const clipDescription = document.getElementsByClassName('clip-components-description');
 
-      // LOOP TO FILL CLIP COMPONENTS WITH INFORMATION //
-      for (let j = 0; j < data.pageInfo.resultsPerPage && j < amountOfResults; j += 1) {
-        (function infoForComponents() {
-          channelHeadline[j].innerHTML += `<a class="anchor" href="https://www.youtube.com/watch?v=${arr[j].ids}" target="_blanket">${arr[j].ttl}</a>`;
-          channelHeadline[j].style.background = 'darkgreen';
-          channelHeadline[j].style.textAlign = 'center';
-          const anchor = document.getElementsByClassName('anchor')[j];
-          anchor.style.color = 'white';
+    const channelHeadline = document.getElementsByClassName('clip-components-headline');
+    const channelName = document.getElementsByClassName('clip-components-title');
+    const clipDate = document.getElementsByClassName('clip-components-date');
+    const preview = document.getElementsByClassName('clip-components-preview');
+    const amountOfViewers = document.getElementsByClassName('clip-components-viewers');
+    const clipDescription = document.getElementsByClassName('clip-components-description');
 
-          preview[j].style.background = `url('${arr[j].img}') no-repeat`;
-          preview[j].style.backgroundSize = '100%';
+    // LOOP TO FILL CLIP COMPONENTS WITH INFORMATION //
+    for (let j = 0; j < data.pageInfo.resultsPerPage && j < amountOfResults; j += 1) {
+      (function infoForComponents() {
+        channelHeadline[j].innerHTML = `<a class="anchor" href="https://www.youtube.com/watch?v=${arr[j].ids}" target="_blanket">${arr[j].ttl}</a>`;
+        channelHeadline[j].style.background = 'darkgreen';
+        channelHeadline[j].style.textAlign = 'center';
+        const anchor = document.getElementsByClassName('anchor')[j];
+        anchor.style.color = 'white';
 
-          channelName[j].innerHTML += `<div>${arr[j].chTtl}</div>`;
+        preview[j].style.background = `url('${arr[j].img}') no-repeat`;
+        preview[j].style.backgroundSize = '100%';
 
-          const timeOfUpload = new Date(arr[j].dateUpload);
-          const fullYear = timeOfUpload.getFullYear();
-          const month = timeOfUpload.getMonth();
-          const correctMonth = Number(month);
-          const day = timeOfUpload.getDate();
-          clipDate[j].innerHTML += `${fullYear}-${day}-${correctMonth + 1}`;
+        channelName[j].innerHTML = `<i class="fas fa-male"></i><div>${arr[j].chTtl}</div>`;
 
-          amountOfViewers[j].innerHTML += arr[j].amountOfViewers;
+        const timeOfUpload = new Date(arr[j].dateUpload);
+        const fullYear = timeOfUpload.getFullYear();
+        const month = timeOfUpload.getMonth();
+        const correctMonth = Number(month);
+        const day = timeOfUpload.getDate();
+        clipDate[j].innerHTML = `<i class="fas fa-calendar-alt"></i>${fullYear}-${day}-${correctMonth + 1}`;
 
-          clipDescription[j].innerHTML += arr[j].descr;
-        }());
+        amountOfViewers[j].innerHTML = `<i class="fas fa-eye"></i>${arr[j].amountOfViewers}`;
+
+        clipDescription[j].innerHTML = arr[j].descr;
+      }());
+    }
+
+    if (arr.length < 15) {
+      for (let j = 14; j >= arr.length; j -= 1) {
+        const blocksOfClips = document.getElementById('components');
+        blocksOfClips.children[j].style.display = 'none';
       }
-
-      if (arr.length < 15) {
-        for (let j = 14; j >= arr.length; j -= 1) {
-          const blocksOfClips = document.getElementById('components');
-          blocksOfClips.children[j].style.display = 'none';
-        }
-      }
-    }, 50);
+    }
   }
 
   async getClipNames() {
     const { url, urlStatistics } = this.state;
     // url
-    const storage = localStorage.getItem('query');
-    const response = await fetch(url.concat(storage));
+    const response = await fetch(url);
     const data = await response.json();
 
     // Statistics for block 'viewers'
@@ -87,6 +84,7 @@ export default class AppModel {
     // result
     const responseStat = await fetch(correctIds);
     const dataStat = await responseStat.json();
+
     return AppModel.extractClipNames(data, dataStat, identifier);
   }
 }
