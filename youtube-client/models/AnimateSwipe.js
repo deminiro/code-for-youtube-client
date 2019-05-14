@@ -14,7 +14,7 @@ export default function animationSlider() {
         transform: scale(0.96);
         cursor: pointer;
       }
-      ::-webkit-scrollbar, ::-moz-scrollbar{
+      ::-webkit-scrollbar{
         width: 0px;
         height: 0px;
       }
@@ -30,17 +30,14 @@ export default function animationSlider() {
       startX = e.pageX - slider.offsetLeft;
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
-      global.console.log(scrollLeft);
     });
     slider.addEventListener('mouseleave', () => {
       isDown = false;
       slider.classList.remove('active');
-      global.console.log('mouseleave');
     });
     slider.addEventListener('mouseup', () => {
       isDown = false;
       slider.classList.remove('active');
-      global.console.log('mouseup');
     });
     slider.addEventListener('mousemove', (e) => {
       if (!isDown) return;
@@ -48,7 +45,6 @@ export default function animationSlider() {
       const x = e.pageX - slider.offsetLeft;
       const walk = (x - startX) * 3; // scroll-fast
       slider.scrollLeft = scrollLeft - walk;
-      global.console.log(x, walk, slider.scrollLeft);
     });
   }
   animation();
