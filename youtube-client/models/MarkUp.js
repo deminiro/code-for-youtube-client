@@ -81,20 +81,20 @@ export default function MarkUp() {
       (function leftComponent() {
         clipBox[i].setAttribute(
           'style',
-          'display: grid; grid-template-rows: 9% 36% 9% 9% 10% 26%; background: white; border-radius: 0%;',
+          'display: grid; padding-top: 3px; grid-template-rows: 36% 9% 9% 9% 10% 25%; background: white; border-radius: 2%;',
         );
         clipBox[i].innerHTML
-          += '<div id="left-box-headline" class="clip-components-headline" style="width: 100%"></div>';
+          += '<div id="left-box-preview" class="clip-components-preview" style="margin-left: 1px; width: 297px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-preview" class="clip-components-preview" style="width: 100%"></div>';
+          += '<div id="left-box-headline" class="clip-components-headline" style="margin-top: 1px; width: 300px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-title" class="clip-components-title" style="width: 100%"></div>';
+          += '<div id="left-box-title" class="clip-components-title" style="width: 297px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-date" class="clip-components-date" style="width: 100%"></div>';
+          += '<div id="left-box-date" class="clip-components-date" style="width: 297px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-viewers" class="clip-components-viewers" style="width: 100%"></div>';
+          += '<div id="left-box-viewers" class="clip-components-viewers" style="width: 297px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-description" class="clip-components-description" style="width: 100%"></div>';
+          += '<div id="left-box-description" class="clip-components-description" style="width: 297px"></div>';
       }());
     }
 
