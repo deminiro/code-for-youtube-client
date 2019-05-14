@@ -18,7 +18,6 @@ export default function MarkUp() {
     header.className = 'header';
     document.body.appendChild(header);
     header.style.display = 'flex';
-    header.style.position = 'fixed';
     header.style.width = '100%';
     header.style.height = '46px';
     header.style.justifyContent = 'center';
@@ -44,7 +43,6 @@ export default function MarkUp() {
     query.style.borderRadius = '40px';
 
     // input with submit
-
     submit.style.background = 'none';
     submit.style.border = 'none';
     submit.style.position = 'relative';
@@ -56,16 +54,14 @@ export default function MarkUp() {
     document.body.appendChild(main);
 
     main.style.display = 'none';
-    main.style.marginLeft = '8%';
-    main.style.marginTop = `calc(${
-      document.getElementsByClassName('header')[0].clientHeight
-    }px + 3.5%)`;
+    main.style.marginLeft = '1%';
+    main.style.marginTop = '3.5%';
     main.innerHTML += '<div id="components" class="items"></div>';
 
     const div = document.getElementById('components');
     div.setAttribute(
       'style',
-      'position: relative; overflow-x: scroll; display: grid; grid-template-columns: repeat(15, 300px); grid-gap: 9.5%; height: 461px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;',
+      'position: relative; overflow-x: scroll; display: grid; grid-template-columns: repeat(15, 300px); grid-gap: 3.3%; height: 461px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;',
     );
 
     const clipBox = document.getElementsByClassName('clip-components');
@@ -79,7 +75,7 @@ export default function MarkUp() {
           'position: relative; display: grid; padding-top: 3px; grid-template-rows: 36% 9% 9% 9% 10% 25%; background: white; border: 1px solid black; border-radius: 2%;',
         );
         clipBox[i].innerHTML
-          += '<div id="left-box-preview" class="clip-components-preview" style="width: 298px"></div>';
+          += '<div id="left-box-preview" class="clip-components-preview" style="width: 298px; height: 168px"></div>';
         clipBox[i].innerHTML
           += '<div id="left-box-headline" class="clip-components-headline" style="margin-top: 1px; width: 298px;"></div>';
         clipBox[i].innerHTML
