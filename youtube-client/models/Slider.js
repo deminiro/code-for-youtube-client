@@ -23,12 +23,12 @@ export default function Slider() {
       e.style.border = '1px solid black';
       e.style.height = '20px';
       e.style.background = '#D50606';
-      e.style.marginRight = '5px';
       e.style.display = 'none';
       e.style.padding = '0';
       e.style.WebkitUserSelect = 'none';
       e.style.MskitUserSelect = 'none';
       e.style.MozUserSelect = 'none';
+      e.style.marginRight = '5px';
     });
 
     // clicks with buttons
@@ -39,10 +39,15 @@ export default function Slider() {
       const buttonNext = document.getElementById('button-next');
       const submit = document.getElementById('submit');
       let currentPage = 1;
+      // eslint-disable-next-line no-unused-vars
+      const userWidth = window.document.scrollingElement.clientWidth + 13;
 
       function visibleButtons() {
         buttonCurrent.style.display = '';
         buttonNext.style.display = '';
+        buttonPrev.style.display = 'none';
+        buttonPrevTwice.style.display = 'none';
+        currentPage = 1;
 
         buttonCurrent.style.color = 'white';
         buttonCurrent.innerText = currentPage;
@@ -54,9 +59,10 @@ export default function Slider() {
         buttonCurrent.innerText = currentPage;
 
         const components = document.getElementById('components');
+        components.style.scrollBehavior = 'smooth';
         // eslint-disable-next-line no-unused-vars
         let scrollLeft;
-        numForPage += window.document.scrollingElement.clientWidth;
+        numForPage += userWidth;
         components.scrollLeft = numForPage;
 
         if (currentPage === 2) {
@@ -76,8 +82,10 @@ export default function Slider() {
         const components = document.getElementById('components');
         // eslint-disable-next-line no-unused-vars
         let scrollLeft;
-        numForPage -= window.document.scrollingElement.clientWidth;
+        numForPage -= userWidth;
         components.scrollLeft = numForPage;
+        // components.scrollLeft.style.transform = `translateX(${numForPage})`;
+        // components.scrollLeft.style.transition = 'all 2s ease-in-out';
         if (currentPage === 1) {
           buttonPrev.style.display = 'none';
           buttonPrevTwice.style.display = 'none';
@@ -93,7 +101,7 @@ export default function Slider() {
         const components = document.getElementById('components');
         // eslint-disable-next-line no-unused-vars
         let scrollLeft;
-        numForPage -= window.document.scrollingElement.clientWidth * 2;
+        numForPage -= userWidth * 2;
         components.scrollLeft = numForPage;
         if (currentPage === 1) {
           buttonPrev.style.display = 'none';

@@ -20,12 +20,16 @@ export default function animationSlider() {
       }
     </style>`;
     const buttonCurrent = document.getElementById('button-current');
+    const buttonPrev = document.getElementById('button-prev');
+    const buttonPrevTwice = document.getElementById('button-prev-twice');
     let currentPage = 1;
     const slider = document.getElementById('components');
     let isDown = false;
     let startX;
     let scrollLeft;
     let numForPage = 0;
+    // eslint-disable-next-line no-unused-vars
+    let timer;
 
     // functions for click events
     function mouseDown(e) {
@@ -48,22 +52,39 @@ export default function animationSlider() {
       const x = e.pageX - slider.offsetLeft;
       const walk = Math.floor(x - startX);
       slider.scrollLeft = scrollLeft - walk;
-      if (slider.scrollLeft >= numForPage + 150) {
+      if (slider.scrollLeft >= numForPage + 120) {
         numForPage += widthUser;
         slider.scrollLeft = numForPage;
         buttonCurrent.innerText = '';
         currentPage += 1;
         buttonCurrent.innerText = currentPage;
+        slider.style.scrollBehavior = 'smooth';
       }
-      if (walk >= 150) {
+      if (walk >= 120) {
         numForPage -= widthUser;
         slider.scrollLeft = numForPage;
-        buttonCurrent.innerText = '';
-        currentPage -= 1;
-        buttonCurrent.innerText = currentPage;
+        slider.style.scrollBehavior = 'smooth';
+        if (currentPage !== 1) {
+          buttonCurrent.innerText = '';
+          currentPage -= 1;
+          buttonCurrent.innerText = currentPage;
+        }
       }
-      if (walk < 150 && walk > -150) {
+      if (walk < 120 && walk > -120) {
         slider.scrollLeft = numForPage;
+        slider.style.scrollBehavior = 'smooth';
+      }
+      if (currentPage === 1) {
+        buttonPrev.style.display = 'none';
+        buttonPrevTwice.style.display = 'none';
+      }
+      if (currentPage === 2) {
+        buttonPrev.style.display = '';
+        buttonPrevTwice.style.display = 'none';
+      }
+      if (currentPage === 3) {
+        buttonPrev.style.display = '';
+        buttonPrevTwice.style.display = '';
       }
     }
 
