@@ -54,14 +54,14 @@ export default function MarkUp() {
 
     main.style.display = 'none';
     main.style.marginLeft = '1%';
-    main.style.marginTop = '3.5%';
+    main.style.marginTop = '0.5%';
     main.innerHTML += '<div id="components" class="items"></div>';
-    main.style.height = '465px';
+    main.style.height = '533px';
 
     const div = document.getElementById('components');
     div.setAttribute(
       'style',
-      'position: relative; overflow-x: scroll; display: grid; grid-template-columns: repeat(15, 300px); grid-gap: 3.3%; height: 461px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;',
+      'position: relative; overflow-x: scroll; display: grid; grid-template-columns: repeat(15, 400px); grid-gap: 4%; height: 531px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;',
     );
 
     const clipBox = document.getElementsByClassName('clip-components');
@@ -72,20 +72,20 @@ export default function MarkUp() {
       (function leftComponent() {
         clipBox[i].setAttribute(
           'style',
-          'height: 453px; position: relative; display: grid; padding-top: 3px; grid-template-rows: 36% 9% 9% 9% 10% 25%; background: white; border: 1px solid black; border-radius: 2%;',
+          'height: 523px; position: relative; display: grid; padding-top: 3px; grid-template-rows: 41% 9% 9% 9% 10% 20%; background: white; border: 1px solid black; border-radius: 2%;',
         );
         clipBox[i].innerHTML
-          += '<div id="left-box-preview" class="clip-components-preview" style="width: 298px; height: 168px"></div>';
+          += '<div id="left-box-preview" class="clip-components-preview" style="width: 398px; height: 268px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-headline" class="clip-components-headline" style="margin-top: 1px; width: 298px;"></div>';
+          += '<div id="left-box-headline" class="clip-components-headline" style="margin-top: 1px; width: 398px;"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-title" class="clip-components-title" style="width: 297px"></div>';
+          += '<div id="left-box-title" class="clip-components-title" style="width: 397px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-date" class="clip-components-date" style="width: 297px"></div>';
+          += '<div id="left-box-date" class="clip-components-date" style="width: 397px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-viewers" class="clip-components-viewers" style="width: 297px"></div>';
+          += '<div id="left-box-viewers" class="clip-components-viewers" style="width: 397px"></div>';
         clipBox[i].innerHTML
-          += '<div id="left-box-description" class="clip-components-description" style="width: 297px"></div>';
+          += '<div id="left-box-description" class="clip-components-description" style="width: 397px"></div>';
       }());
     }
 

@@ -13,17 +13,20 @@ export default function animationSlider() {
         transition: all 0.1s;
         transform: scale(0.96);
         cursor: pointer;
+        scroll-padding: 0px 0 0 100px;
       }
       ::-webkit-scrollbar{
         width: 0px;
         height: 0px;
       }
+
     </style>`;
     const buttonCurrent = document.getElementById('button-current');
     const buttonPrev = document.getElementById('button-prev');
     const buttonPrevTwice = document.getElementById('button-prev-twice');
     let currentPage = 1;
-    const slider = document.getElementById('components');
+    const blockOfclips = document.getElementById('components');
+    blockOfclips.style.scrollBehavior = 'smooth';
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -34,45 +37,44 @@ export default function animationSlider() {
     // functions for click events
     function mouseDown(e) {
       isDown = true;
-      slider.classList.add('active');
-      startX = e.pageX - slider.offsetLeft;
+      blockOfclips.classList.add('active');
+      startX = e.pageX - blockOfclips.offsetLeft;
       // eslint-disable-next-line prefer-destructuring
-      scrollLeft = slider.scrollLeft;
+      scrollLeft = blockOfclips.scrollLeft;
     }
 
     function mouseLeave() {
       isDown = false;
-      slider.classList.remove('active');
+      blockOfclips.classList.remove('active');
     }
 
     function mouseUp(e) {
       isDown = false;
-      const widthUser = window.document.scrollingElement.clientWidth;
-      slider.classList.remove('active');
-      const x = e.pageX - slider.offsetLeft;
+      const widthUser = window.document.scrollingElement.clientWidth + 10;
+      blockOfclips.classList.remove('active');
+      blockOfclips.style.scrollBehavior = 'smooth';
+      const x = e.pageX - blockOfclips.offsetLeft;
       const walk = Math.floor(x - startX);
-      slider.scrollLeft = scrollLeft - walk;
-      if (slider.scrollLeft >= numForPage + 120) {
+      blockOfclips.scrollLeft = scrollLeft - walk;
+      if (blockOfclips.scrollLeft >= numForPage + 150) {
         numForPage += widthUser;
-        slider.scrollLeft = numForPage;
+        blockOfclips.scrollLeft = numForPage;
         buttonCurrent.innerText = '';
         currentPage += 1;
         buttonCurrent.innerText = currentPage;
-        slider.style.scrollBehavior = 'smooth';
       }
-      if (walk >= 120) {
+      if (walk >= 150) {
         numForPage -= widthUser;
-        slider.scrollLeft = numForPage;
-        slider.style.scrollBehavior = 'smooth';
+        blockOfclips.scrollLeft = numForPage;
+
         if (currentPage !== 1) {
           buttonCurrent.innerText = '';
           currentPage -= 1;
           buttonCurrent.innerText = currentPage;
         }
       }
-      if (walk < 120 && walk > -120) {
-        slider.scrollLeft = numForPage;
-        slider.style.scrollBehavior = 'smooth';
+      if (walk < 150 && walk > -150) {
+        blockOfclips.scrollLeft = numForPage;
       }
       if (currentPage === 1) {
         buttonPrev.style.display = 'none';
@@ -91,16 +93,17 @@ export default function animationSlider() {
     function mouseMove(e) {
       if (!isDown) return;
       e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
+      blockOfclips.style.scrollBehavior = '';
+      const x = e.pageX - blockOfclips.offsetLeft;
       const walk = (x - startX); // scroll-fast
-      slider.scrollLeft = scrollLeft - walk;
-      global.console.log(x, walk, slider.scrollLeft);
+      blockOfclips.scrollLeft = scrollLeft - walk;
+      global.console.log(x, walk, blockOfclips.scrollLeft);
     }
     // listeners for scroll page
-    slider.addEventListener('mousedown', mouseDown);
-    slider.addEventListener('mouseleave', mouseLeave);
-    slider.addEventListener('mouseup', mouseUp);
-    slider.addEventListener('mousemove', mouseMove);
+    blockOfclips.addEventListener('mousedown', mouseDown);
+    blockOfclips.addEventListener('mouseleave', mouseLeave);
+    blockOfclips.addEventListener('mouseup', mouseUp);
+    blockOfclips.addEventListener('mousemove', mouseMove);
   }
   animation();
 }

@@ -5,7 +5,7 @@ export default function StylesForClipsInfo() {
     const gridStrWithoutSpace = gridStr.replace(/\s/g, '');
     const amountOfCurrentBlocks = gridStrWithoutSpace.length / 5;
     const amountNewUpload = amountOfCurrentBlocks + 15;
-    components.style.gridTemplateColumns = `repeat(${amountNewUpload}, 300px)`;
+    components.style.gridTemplateColumns = `repeat(${amountNewUpload}, 400px)`;
     for (let i = 0; i < 15; i += 1) {
       components.innerHTML += '<div class="clip-components clip-components-new"></div>';
     }
@@ -17,20 +17,20 @@ export default function StylesForClipsInfo() {
       (function leftComponent() {
         clipBox[i].setAttribute(
           'style',
-          'height: 453px; position: relative; display: grid; padding-top: 3px; grid-template-rows: 36% 9% 9% 9% 10% 25%; background: white; border: 1px solid black; border-radius: 2%;',
+          'height: 523px; position: relative; display: grid; padding-top: 3px; grid-template-rows: 41% 9% 9% 9% 10% 20%; background: white; border: 1px solid black; border-radius: 2%;',
         );
         clipBox[i].innerHTML
-            += '<div id="left-box-preview" class="clip-components-preview" style="width: 298px; height: 168px"></div>';
+            += '<div id="left-box-preview" class="clip-components-preview" style="width: 398px; height: 268px"></div>';
         clipBox[i].innerHTML
-            += '<div id="left-box-headline" class="clip-components-headline" style="margin-top: 1px; width: 298px;"></div>';
+            += '<div id="left-box-headline" class="clip-components-headline" style="margin-top: 1px; width: 398px;"></div>';
         clipBox[i].innerHTML
-            += '<div id="left-box-title" class="clip-components-title" style="width: 297px"></div>';
+            += '<div id="left-box-title" class="clip-components-title" style="width: 397px"></div>';
         clipBox[i].innerHTML
-            += '<div id="left-box-date" class="clip-components-date" style="width: 297px"></div>';
+            += '<div id="left-box-date" class="clip-components-date" style="width: 397px"></div>';
         clipBox[i].innerHTML
-            += '<div id="left-box-viewers" class="clip-components-viewers" style="width: 297px"></div>';
+            += '<div id="left-box-viewers" class="clip-components-viewers" style="width: 397px"></div>';
         clipBox[i].innerHTML
-            += '<div id="left-box-description" class="clip-components-description" style="width: 297px"></div>';
+            += '<div id="left-box-description" class="clip-components-description" style="width: 397px"></div>';
       }());
     }
 

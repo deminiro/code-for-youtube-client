@@ -121,24 +121,24 @@ export default function Slider() {
         toolTipNext.style.display = '';
         toolTipNext.style.height = '15px';
         toolTipNext.style.width = '15px';
-        toolTipNext.style.bottom = '12px';
         toolTipNext.style.marginLeft = '3px';
+        toolTipNext.style.marginTop = '-46px';
       }
       function toolTipPrevButton() {
         toolTipPrev.innerText = currentPage - 1;
         toolTipPrev.style.display = '';
         toolTipPrev.style.height = '15px';
         toolTipPrev.style.width = '15px';
-        toolTipPrev.style.bottom = '12px';
         toolTipPrev.style.marginLeft = '3px';
+        toolTipPrev.style.marginTop = '-46px';
       }
       function toolTipPrevTwiceButton() {
         toolTipPrevTwice.innerText = currentPage - 2;
         toolTipPrevTwice.style.display = '';
         toolTipPrevTwice.style.height = '15px';
         toolTipPrevTwice.style.width = '15px';
-        toolTipPrevTwice.style.bottom = '12px';
         toolTipPrevTwice.style.marginLeft = '3px';
+        toolTipPrevTwice.style.marginTop = '-46px';
       }
       (function clickEvents() {
         submit.addEventListener('click', visibleButtons);
