@@ -11,10 +11,10 @@ export default function Slider() {
     slider.style.display = 'flex';
     slider.style.justifyContent = 'center';
     slider.style.marginTop = '10px';
-    slider.innerHTML += '<button id="button-prev-twice" class="slider-button"><i class="fas fa-angle-double-left" style="color: white"></i></button>';
-    slider.innerHTML += '<button id="button-prev" class="slider-button"><i class="fas fa-chevron-left" style="color: white"></i></button>';
+    slider.innerHTML += '<button id="button-prev-twice" class="slider-button"><i class="fas fa-angle-double-left" style="color: white"></i><p id="tooltip-prev-twice" style="position:fixed; display: none; background: yellow;"></p></button>';
+    slider.innerHTML += '<button id="button-prev" class="slider-button"><i class="fas fa-chevron-left" style="color: white"></i><p id="tooltip-prev" style="position:fixed; display: none; background: yellow;"></p></button>';
     slider.innerHTML += '<button id="button-current" class="slider-button" style="font-size: 12px"></button>';
-    slider.innerHTML += '<button id="button-next" class="slider-button"><i class="fas fa-chevron-right" style="color: white"></i></button>';
+    slider.innerHTML += '<button id="button-next" class="slider-button"><i class="fas fa-chevron-right" style="color: white"></i><p id="tooltip-next" style="position:fixed; display: none; background: yellow;"></p></button>';
 
     const sliderButton = Array.from(document.getElementsByClassName('slider-button'));
     sliderButton.forEach((e) => {
@@ -38,6 +38,9 @@ export default function Slider() {
       const buttonCurrent = document.getElementById('button-current');
       const buttonNext = document.getElementById('button-next');
       const submit = document.getElementById('submit');
+      const toolTipNext = document.getElementById('tooltip-next');
+      const toolTipPrev = document.getElementById('tooltip-prev');
+      const toolTipPrevTwice = document.getElementById('tooltip-prev-twice');
       let currentPage = 1;
       // eslint-disable-next-line no-unused-vars
       const userWidth = window.document.scrollingElement.clientWidth + 13;
@@ -57,6 +60,7 @@ export default function Slider() {
         buttonCurrent.innerText = '';
         currentPage += 1;
         buttonCurrent.innerText = currentPage;
+        toolTipNext.style.display = 'none';
 
         const components = document.getElementById('components');
         components.style.scrollBehavior = 'smooth';
@@ -78,6 +82,7 @@ export default function Slider() {
         buttonCurrent.innerText = '';
         currentPage -= 1;
         buttonCurrent.innerText = currentPage;
+        toolTipPrev.style.display = 'none';
 
         const components = document.getElementById('components');
         // eslint-disable-next-line no-unused-vars
@@ -97,6 +102,7 @@ export default function Slider() {
         buttonCurrent.innerText = '';
         currentPage -= 2;
         buttonCurrent.innerText = currentPage;
+        toolTipPrevTwice.style.display = 'none';
 
         const components = document.getElementById('components');
         // eslint-disable-next-line no-unused-vars
@@ -109,11 +115,39 @@ export default function Slider() {
         }
         if (currentPage === 2) buttonPrevTwice.style.display = 'none';
       }
+
+      function toolTipNextButton() {
+        toolTipNext.innerText = currentPage + 1;
+        toolTipNext.style.display = '';
+        toolTipNext.style.height = '15px';
+        toolTipNext.style.width = '15px';
+        toolTipNext.style.bottom = '12px';
+        toolTipNext.style.marginLeft = '3px';
+      }
+      function toolTipPrevButton() {
+        toolTipPrev.innerText = currentPage - 1;
+        toolTipPrev.style.display = '';
+        toolTipPrev.style.height = '15px';
+        toolTipPrev.style.width = '15px';
+        toolTipPrev.style.bottom = '12px';
+        toolTipPrev.style.marginLeft = '3px';
+      }
+      function toolTipPrevTwiceButton() {
+        toolTipPrevTwice.innerText = currentPage - 2;
+        toolTipPrevTwice.style.display = '';
+        toolTipPrevTwice.style.height = '15px';
+        toolTipPrevTwice.style.width = '15px';
+        toolTipPrevTwice.style.bottom = '12px';
+        toolTipPrevTwice.style.marginLeft = '3px';
+      }
       (function clickEvents() {
         submit.addEventListener('click', visibleButtons);
-        buttonNext.addEventListener('click', useButtonNext);
-        buttonPrev.addEventListener('click', prevButton);
-        buttonPrevTwice.addEventListener('click', prevTwiceButton);
+        buttonNext.addEventListener('mouseup', useButtonNext);
+        buttonPrev.addEventListener('mouseup', prevButton);
+        buttonPrevTwice.addEventListener('mouseup', prevTwiceButton);
+        buttonNext.addEventListener('mousedown', toolTipNextButton);
+        buttonPrev.addEventListener('mousedown', toolTipPrevButton);
+        buttonPrevTwice.addEventListener('mousedown', toolTipPrevTwiceButton);
       }());
     }());
   }
