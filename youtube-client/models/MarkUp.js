@@ -6,7 +6,6 @@ export default function MarkUp() {
     document.body.style.height = '100vh';
     document.body.style.margin = '0';
     document.body.style.paddingTop = '2%';
-    document.body.style.overflowY = 'hidden';
     document.body.style.backgroundImage = 'linear-gradient(to bottom, #e32a54, #ee6b9d, #eba3d3, #ebd4f3, #ffffff)';
     const header = document.createElement('header');
     const form = document.createElement('form');
@@ -57,6 +56,7 @@ export default function MarkUp() {
     main.style.marginLeft = '1%';
     main.style.marginTop = '3.5%';
     main.innerHTML += '<div id="components" class="items"></div>';
+    main.style.height = '465px';
 
     const div = document.getElementById('components');
     div.setAttribute(
@@ -72,7 +72,7 @@ export default function MarkUp() {
       (function leftComponent() {
         clipBox[i].setAttribute(
           'style',
-          'position: relative; display: grid; padding-top: 3px; grid-template-rows: 36% 9% 9% 9% 10% 25%; background: white; border: 1px solid black; border-radius: 2%;',
+          'height: 453px; position: relative; display: grid; padding-top: 3px; grid-template-rows: 36% 9% 9% 9% 10% 25%; background: white; border: 1px solid black; border-radius: 2%;',
         );
         clipBox[i].innerHTML
           += '<div id="left-box-preview" class="clip-components-preview" style="width: 298px; height: 168px"></div>';
@@ -124,6 +124,14 @@ export default function MarkUp() {
       clipComponentsDescription.forEach((e) => {
         e.style.background = '';
       });
+    }());
+
+    // function for create dom element for save nextPageToken
+    (function nextPageToken() {
+      const p = document.createElement('p');
+      document.body.appendChild(p);
+      p.setAttribute('id', 'next-page-token-info');
+      p.style.display = 'none';
     }());
   }
   queryBox();
