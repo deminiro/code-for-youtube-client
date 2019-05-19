@@ -1,7 +1,8 @@
 export default function Adaptive() {
   async function adaptiveScreens() {
     const { head } = document;
-    head.innerHTML += '<meta name="viewport" content="width=device-width,initial-scale=1">';
+    head.innerHTML
+      += '<meta name="viewport" content="width=device-width,initial-scale=1">';
     head.innerHTML += `<style> 
     .items.active {
       background: rgba(255,255,255,0.3);
