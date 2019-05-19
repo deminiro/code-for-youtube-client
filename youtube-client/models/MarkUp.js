@@ -2,11 +2,13 @@ export default function MarkUp() {
   async function queryBox() {
     // title of webpage
     window.document.title = 'Youtube-client';
-    // document.body.style.overflowX = 'hidden';
+    document.body.style.overflowY = 'hidden';
     document.body.style.height = '100vh';
     document.body.style.margin = '0';
     document.body.style.paddingTop = '2%';
     document.body.style.backgroundImage = 'linear-gradient(to bottom, #e32a54, #ee6b9d, #eba3d3, #ebd4f3, #ffffff)';
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.fontSize = 'larger';
     const header = document.createElement('header');
     const form = document.createElement('form');
     // icon
@@ -24,7 +26,7 @@ export default function MarkUp() {
     form.setAttribute('onsubmit', 'return false');
     form.setAttribute(
       'style',
-      'width: 60%; margin: 0 auto; display: flex; border-radius: 2%',
+      'width: 60%; justify-content: center; display: flex; border-radius: 2%',
     );
 
     form.innerHTML
@@ -53,21 +55,19 @@ export default function MarkUp() {
     document.body.appendChild(main);
 
     main.style.display = 'none';
-    main.style.marginLeft = '1%';
     main.style.marginTop = '0.5%';
     main.innerHTML += '<div id="components" class="items"></div>';
     main.style.height = '533px';
 
-    const div = document.getElementById('components');
-    div.setAttribute(
+    const blocksOfClips = document.getElementById('components');
+    blocksOfClips.setAttribute(
       'style',
-      'position: relative; overflow-x: scroll; display: grid; grid-template-columns: repeat(15, 400px); grid-gap: 4%; height: 531px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;',
+      'position: relative; overflow-x: scroll; display: grid; grid-template-columns: repeat(15, 400px); height: 531px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;',
     );
 
     const clipBox = document.getElementsByClassName('clip-components');
 
     for (let i = 0; i < 15; i += 1) {
-      const blocksOfClips = document.getElementById('components');
       blocksOfClips.innerHTML += '<div class="clip-components"></div>';
       (function leftComponent() {
         clipBox[i].setAttribute(

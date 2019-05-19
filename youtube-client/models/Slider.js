@@ -41,9 +41,27 @@ export default function Slider() {
       const toolTipNext = document.getElementById('tooltip-next');
       const toolTipPrev = document.getElementById('tooltip-prev');
       const toolTipPrevTwice = document.getElementById('tooltip-prev-twice');
+      const components = document.getElementById('components');
+      let gridGapOnPage = 0;
       let currentPage = 1;
-      // eslint-disable-next-line no-unused-vars
-      const userWidth = window.document.scrollingElement.clientWidth + 13;
+
+      const userWidth = window.document.scrollingElement.clientWidth;
+
+      setInterval(() => {
+        (function widthOfScreenForGridGapOnPage() {
+          if (userWidth > 2100) {
+            gridGapOnPage = 12.5;
+          } else if (userWidth <= 1920 || userWidth > 1368) {
+            gridGapOnPage = 5.3;
+          } else if (userWidth <= 1368 || userWidth >= 1000) {
+            gridGapOnPage = 8;
+          } else if (userWidth <= 600) {
+            gridGapOnPage = 100;
+          } else if (userWidth <= 400) {
+            gridGapOnPage = 3.8;
+          }
+        }());
+      }, 500);
 
       function visibleButtons() {
         buttonCurrent.style.display = '';
@@ -62,12 +80,12 @@ export default function Slider() {
         buttonCurrent.innerText = currentPage;
         toolTipNext.style.display = 'none';
 
-        const components = document.getElementById('components');
         components.style.scrollBehavior = 'smooth';
         // eslint-disable-next-line no-unused-vars
         let scrollLeft;
         numForPage += userWidth;
-        components.scrollLeft = numForPage;
+        // eslint-disable-next-line max-len
+        components.scrollLeft = numForPage + (Math.ceil(userWidth * gridGapOnPage / 100) * (currentPage - 1));
 
         if (currentPage === 2) {
           buttonPrev.style.display = '';
@@ -83,14 +101,11 @@ export default function Slider() {
         currentPage -= 1;
         buttonCurrent.innerText = currentPage;
         toolTipPrev.style.display = 'none';
-
-        const components = document.getElementById('components');
         // eslint-disable-next-line no-unused-vars
         let scrollLeft;
         numForPage -= userWidth;
-        components.scrollLeft = numForPage;
-        // components.scrollLeft.style.transform = `translateX(${numForPage})`;
-        // components.scrollLeft.style.transition = 'all 2s ease-in-out';
+        // eslint-disable-next-line max-len
+        components.scrollLeft = numForPage + (Math.ceil(userWidth * gridGapOnPage / 100) * (currentPage - 1));
         if (currentPage === 1) {
           buttonPrev.style.display = 'none';
           buttonPrevTwice.style.display = 'none';
@@ -104,11 +119,11 @@ export default function Slider() {
         buttonCurrent.innerText = currentPage;
         toolTipPrevTwice.style.display = 'none';
 
-        const components = document.getElementById('components');
         // eslint-disable-next-line no-unused-vars
         let scrollLeft;
         numForPage -= userWidth * 2;
-        components.scrollLeft = numForPage;
+        // eslint-disable-next-line max-len
+        components.scrollLeft = numForPage + (Math.ceil(userWidth * gridGapOnPage / 100) * (currentPage - 1));
         if (currentPage === 1) {
           buttonPrev.style.display = 'none';
           buttonPrevTwice.style.display = 'none';

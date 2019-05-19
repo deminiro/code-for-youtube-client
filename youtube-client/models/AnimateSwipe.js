@@ -1,26 +1,5 @@
 export default function animationSlider() {
   async function animation() {
-    const { head } = document;
-    // const blocksOfClips = document.getElementById('components');
-    head.innerHTML += `<style> .items.active {
-      background: rgba(255,255,255,0.3);
-      cursor: grabbing;
-      cursor: -webkit-grabbing;
-      transform: scale(1);
-      }
-
-      .items {
-        transition: all 0.1s;
-        transform: scale(0.96);
-        cursor: pointer;
-        scroll-padding: 0px 0 0 100px;
-      }
-      ::-webkit-scrollbar{
-        width: 0px;
-        height: 0px;
-      }
-
-    </style>`;
     const buttonCurrent = document.getElementById('button-current');
     const buttonPrev = document.getElementById('button-prev');
     const buttonPrevTwice = document.getElementById('button-prev-twice');
@@ -31,8 +10,6 @@ export default function animationSlider() {
     let startX;
     let scrollLeft;
     let numForPage = 0;
-    // eslint-disable-next-line no-unused-vars
-    let timer;
 
     // functions for click events
     function mouseDown(e) {
@@ -50,7 +27,7 @@ export default function animationSlider() {
 
     function mouseUp(e) {
       isDown = false;
-      const widthUser = window.document.scrollingElement.clientWidth + 10;
+      const widthUser = window.document.scrollingElement.clientWidth;
       blockOfclips.classList.remove('active');
       blockOfclips.style.scrollBehavior = 'smooth';
       const x = e.pageX - blockOfclips.offsetLeft;
