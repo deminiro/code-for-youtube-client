@@ -1,8 +1,5 @@
 export default function Slider() {
   async function markUpSlider() {
-    //   const amountOfResults = data.pageInfo.totalResults;
-    //   const amountPerPage = data.pageInfo.resultsPerPage;
-
     document.body.innerHTML += '<div id="slider"></div>';
     const slider = document.getElementById('slider');
     // for swipe per page

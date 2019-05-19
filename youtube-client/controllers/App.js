@@ -3,19 +3,20 @@ import Requests from '../models/Requests';
 import Slider from '../models/Slider';
 import AnimateSwipe from '../models/AnimateSwipe';
 import StylesForClipsInfo from '../models/StylesForClipsInfo';
-// import NewQuery from '../models/NewQuery';
+import Adaptive from '../models/Adaptive';
 
 export default class App {
   constructor() {
     this.state = {
-      url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyAZiyMBKWN-3gTB_nubDKItHuK72xwKNAs&type=video&part=snippet&maxResults=15&q=&pageToken=',
-      urlStatistics: 'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyAZiyMBKWN-3gTB_nubDKItHuK72xwKNAs&id=&part=snippet,statistics',
+      url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&type=video&part=snippet&maxResults=15&q=&pageToken=',
+      urlStatistics: 'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&id=&part=snippet,statistics',
     };
   }
 
 
   async start() {
     const model = new Requests(this.state);
+    await Adaptive();
     await MarkUp();
     await Slider();
     await AnimateSwipe();
@@ -33,7 +34,6 @@ export default class App {
       this.state.url = this.state.url.slice(0, index + 2);
       main.style.display = 'block';
       this.state.url = this.state.url.concat(`${query.value}`);
-      // display from first clip box
       // eslint-disable-next-line no-unused-vars
       let scrollLeft;
       blockOfClips.scrollLeft = 0;
@@ -52,7 +52,7 @@ export default class App {
       }
     }
     const nextButton = document.getElementById('button-next');
-    nextButton.addEventListener('click', advancedQuery);
+    nextButton.addEventListener('mouseup', advancedQuery);
     blockOfClips.addEventListener('mouseup', advancedQuery);
   }
 }

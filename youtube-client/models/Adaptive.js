@@ -1,7 +1,6 @@
 export default function Adaptive() {
   async function adaptiveScreens() {
     const { head } = document;
-    // const blocksOfClips = document.getElementById('components');
     head.innerHTML += '<meta name="viewport" content="width=device-width,initial-scale=1">';
     head.innerHTML += `<style> 
     .items.active {
