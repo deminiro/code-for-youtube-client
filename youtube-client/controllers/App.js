@@ -8,11 +8,12 @@ import Adaptive from '../models/Adaptive';
 export default class App {
   constructor() {
     this.state = {
-      url: 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&type=video&part=snippet&maxResults=15&q=&pageToken=',
-      urlStatistics: 'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&id=&part=snippet,statistics',
+      url:
+        'https://www.googleapis.com/youtube/v3/search?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&type=video&part=snippet&maxResults=15&q=&pageToken=',
+      urlStatistics:
+        'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&id=&part=snippet,statistics',
     };
   }
-
 
   async start() {
     const model = new Requests(this.state);
