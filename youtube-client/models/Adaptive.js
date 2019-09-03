@@ -24,7 +24,7 @@ export default function Adaptive() {
       }
     @media screen and (max-width: 1920px) {
       .items {
-        grid-gap: 5.5%;
+        grid-gap: 0;
       }
     }
     @media screen and (max-width: 1368px) {
