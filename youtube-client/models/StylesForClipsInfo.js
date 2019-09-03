@@ -30,7 +30,7 @@ export default function StylesForClipsInfo() {
         clipBox[i].innerHTML
             += '<div id="left-box-viewers" class="clip-components-viewers" style="width: 397px"></div>';
         clipBox[i].innerHTML
-            += '<div id="left-box-description" class="clip-components-description" style="width: 397px"></div>';
+            += '<div id="left-box-description" class="clip-components-description" style="width: 397px; overflow: hidden"></div>';
       }());
     }
 
