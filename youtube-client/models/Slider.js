@@ -39,26 +39,10 @@ export default function Slider() {
       const toolTipPrev = document.getElementById('tooltip-prev');
       const toolTipPrevTwice = document.getElementById('tooltip-prev-twice');
       const components = document.getElementById('components');
-      let gridGapOnPage = 0;
+      // let gridGapOnPage = 0;
       let currentPage = 1;
 
       const userWidth = window.document.scrollingElement.clientWidth;
-
-      setInterval(() => {
-        (function widthOfScreenForGridGapOnPage() {
-          if (userWidth > 2100) {
-            gridGapOnPage = 12.5;
-          } else if (userWidth <= 1920 || userWidth > 1368) {
-            gridGapOnPage = 5.3;
-          } else if (userWidth <= 1368 || userWidth >= 1000) {
-            gridGapOnPage = 8;
-          } else if (userWidth <= 600) {
-            gridGapOnPage = 100;
-          } else if (userWidth <= 400) {
-            gridGapOnPage = 3.8;
-          }
-        }());
-      }, 500);
 
       function visibleButtons() {
         buttonCurrent.style.display = '';
@@ -82,7 +66,7 @@ export default function Slider() {
         let scrollLeft;
         numForPage += userWidth;
         // eslint-disable-next-line max-len
-        components.scrollLeft = numForPage + (Math.ceil(userWidth * gridGapOnPage / 100) * (currentPage - 1));
+        components.scrollLeft = numForPage; // + (Math.ceil(userWidth * gridGapOnPage / 100) * (currentPage - 1));
 
         if (currentPage === 2) {
           buttonPrev.style.display = '';
@@ -102,7 +86,7 @@ export default function Slider() {
         let scrollLeft;
         numForPage -= userWidth;
         // eslint-disable-next-line max-len
-        components.scrollLeft = numForPage + (Math.ceil(userWidth * gridGapOnPage / 100) * (currentPage - 1));
+        components.scrollLeft = numForPage;
         if (currentPage === 1) {
           buttonPrev.style.display = 'none';
           buttonPrevTwice.style.display = 'none';
@@ -120,7 +104,7 @@ export default function Slider() {
         let scrollLeft;
         numForPage -= userWidth * 2;
         // eslint-disable-next-line max-len
-        components.scrollLeft = numForPage + (Math.ceil(userWidth * gridGapOnPage / 100) * (currentPage - 1));
+        components.scrollLeft = numForPage;
         if (currentPage === 1) {
           buttonPrev.style.display = 'none';
           buttonPrevTwice.style.display = 'none';
